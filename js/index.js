@@ -1,68 +1,47 @@
-// creating the nav bar
-var bodyobj = $('body')
-bodyobj.append('<nav/>')
-var navobj=bodyobj.find('nav')
-navobj.addClass('navbar')
-navobj.css('height', '100px')
-navobj.css('background-color', 'black')
 
-// in the nav, create a div
-navobj.append('<div/>')
-var navdivobj = navobj.find('div')
-// console.log(navdivobj)
-navdivobj.addClass('navdiv')
-navdivobj.css({
-    'position':'relative',
-})
-
-// create a div as sign up button
-navdivobj.append('<div/>')
-var signupdivobj = navdivobj.find('div')
-signupdivobj
-    .attr('class','signup')
-    .css({
-        'height': '30px',
-        'width': '100px',
-        'color': 'white', 
-        'font-weight':'bold',
-        'font-size':'25',
-        'font-family':'arial',
-        'border': 'solid white 1px',
-        'display': 'flex',
-        'justify-content': 'center',
-        'align-items': 'center',
-        'position': 'absolute',
-        'top':'30px',
-        'right': '10px'
-        })
-    .text('Sign up')
-
-        
-    navdivobj.append('<div/>')
-    var logindivobj = $(navdivobj.find('div')[1])
-    // console.log(logindivobj)
+var 
+    signupdivobj,
     logindivobj
-        .attr('class','signup')
-        .css({
-            'height': '30px',
-            'width': '100px',
-            'color': 'white', 
-            'font-weight':'bold',
-            'font-size':'25',
-            'font-family':'arial',
-            'border': 'solid white 1px',
-            'display': 'flex',
-            'justify-content': 'center',
-            'align-items': 'center',
-            'position': 'absolute',
-            'top':'30px',
-            'right': '250px'
-            })
-        .text('Log in')
-    
+;
+
+//make the nav bar and buttons
+makenav2(document.body)
+
+function doit (){
+    console.log('clicked')
+}function dothat (){
+    console.log('mousedown')
+}
 
 
-// add anchors
+var body = document.body
+var data = {
+    parent: body,
+    nodetype: 'div',
+    attrs: {
+        'class':'stage',
+        'id': 'stage',
+        'name': 'stage'
+    },
+    styles:{
+        'background-color': 'lightyellow',
+        'width':'100%',
+        'height': '100%'
+    },
+    events:{
+        'click': doit,
+        'mousedown': dothat
+    },
+    children:[
+        {   nodetype: 'p',
+            properties: {'textContent': 'What the'},
+            styles:{
+                'font-size':'30px',
+            }
+        }
+    ]
+}
+var thestage =MakeDomEle(data)
 
 
 
