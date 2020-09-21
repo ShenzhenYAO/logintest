@@ -8,13 +8,12 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="js/tools.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-    <!-- add html doms -->
-    <script src="js/index.js"></script>
 
     <!-- load the firebase sdk  -->
     <!-- Copy and paste these scripts into the bottom of your <body> tag, but before you use any Firebase services: -->
@@ -26,56 +25,12 @@
      https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-analytics.js"></script>
 
-    <script>
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        var firebaseConfig = {
-            apiKey: "AIzaSyBSK9U03kHwBBB3bgNh0Jo9tEVY7y4A16I",
-            authDomain: "logintest-bb124.firebaseapp.com",
-            databaseURL: "https://logintest-bb124.firebaseio.com",
-            projectId: "logintest-bb124",
-            storageBucket: "logintest-bb124.appspot.com",
-            messagingSenderId: "1084200182001",
-            appId: "1:1084200182001:web:ffaaa2c5adb9e9d8e34950",
-            measurementId: "G-3X94PC3T8K"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
-
-        // instantiate the authentication method
-        const auth = firebase.auth();
-        var email = 'xxyy@xx.com', pass = '123456';
-
-        // about signup signin and signout
-        // https://firebase.google.com/docs/auth/web/password-auth
-        // https://firebase.google.com/docs/auth/web/manage-users (vereifcation email, etc)
-        // https://hackmd.io/@jmk2142/B1-9aonwM?type=view
-
-        // define the actions after the sign up div is clicked
-        console.log(document.getElementById('signup'))
-        document.getElementById('signup').onclick = signup
-        function signup() {            
-            // console.log(email, pass)
-            // sign up to firebase logintest project
-            auth.createUserWithEmailAndPassword(email, pass).then(response => {
-                console.log(response)
-            })
-        }
-
-        pass='wrongpass'
-        // define the actions after the log in div is clicked
-        $('#login').click(login)
-        function login(){
-            console.log(email, pass)
-            auth.signInWithEmailAndPassword(email, pass).then(response => {
-                console.log(response)
-                console.log(response.user)
-            })            
-        }
-
-
-    </script>
+    <script src="input/data.js"></script>
+    <script src="js/commontools.js"></script>
+    <script src="js/projecttools.js"></script>
+    <!-- add html doms -->
+    <script src="js/index.js"></script>
+    <script src="js/test.js"></script>
 
 </body>
 
