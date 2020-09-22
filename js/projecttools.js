@@ -50,7 +50,7 @@ async function ShowLoginModal(){
                 loginformdata.parent = $('#modal-body')[0];
                 // console.log(signupformdata1.parent);
                 MakeDomEle(loginformdata)
-                $('#loginsubmit').click(login)
+                $('#loginsubmit').click(await login)
         //     }
         // )
 }
@@ -68,20 +68,40 @@ function signup() {
     console.log(email, password)
     // sign up to firebase logintest project
     auth.createUserWithEmailAndPassword(email, password).then(response => {
-        console.log(response)
+        // console.log(response)
         closemodal()
-    })  
+    })
+  
 }
 
-function login() {
+async function login() {
     // console.log(signupform)
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value
-    console.log(email, password)
-    auth.signInWithEmailAndPassword(email, password).then(response => {
-        console.log(response)
-        console.log(response.user)
-        closemodal()
+    // console.log(email, password)
+    var newpromise = new Promise(
+        // then new promise is to define a resolved value
+        (resolve) => {
+                auth.signInWithEmailAndPassword(email, password).then(response => {
+                    resolve(response) 
+                });
+         }//resolve
+    ) // new promise;
+
+    // console.log(response)       
+    closemodal()
+
+    // get the current user (a better way is to use auth.onAuthStateChanged())
+    var loginresponse = await newpromise.then(d => {
+        // console.log(d)
+        return d
     })
+
+    // console.log(loginresponse.user) 
+    // audit user status
+
+   
 }
+
+
 

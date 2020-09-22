@@ -1,5 +1,6 @@
 var signupform, thestage, signup;
 var auth=undefined;
+var currentuser;
 
 // data for creating the nav bar and its offstring nodes
 var navdomsdata = {
@@ -73,10 +74,36 @@ var navdomsdata = {
                         'align-items': 'center',
                         'position': 'absolute',
                         'top': '30px',
-                        'right': '250px'
+                        'right': '450px'
                     },
                     properties: {
                         'textContent': 'Log in'
+                    }
+                },
+                {
+                    nodetype: 'div',
+                    attrs: {
+                        'class': 'navbutton',
+                        'id': 'logout',
+                        'name': 'logout'
+                    },
+                    styles: {
+                        'height': '30px',
+                        'width': '100px',
+                        'color': 'white',
+                        'font-weight': 'bold',
+                        'font-size': '25',
+                        'font-family': 'arial',
+                        'border': 'solid white 1px',
+                        'display': 'flex',
+                        'justify-content': 'center',
+                        'align-items': 'center',
+                        'position': 'absolute',
+                        'top': '30px',
+                        'right': '250px'
+                    },
+                    properties: {
+                        'textContent': 'Log out'
                     }
                 }
             ]
