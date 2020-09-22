@@ -8,18 +8,29 @@
     // instantiate the authentication method
     auth = firebase.auth();
 
+    // set the data source
+    db = firebase.firestore();
+
+    // get data in a collection
+    db.collection('adherence_research').get().then(
+        d=>{
+            console.log(d.docs[0].data())
+        }
+    )
+
+
 
     // audit user status
     auth.onAuthStateChanged(user => {
         // console.log(user)
-        if(user){
-            console.log('user logged in:' , user)
-            thestage.innerHTML=`
+        if (user) {
+            console.log('user logged in:', user)
+            thestage.innerHTML = `
                 <h2> User ${user.email} logged in !</h2>
                 `
         } else {
-            console.log( ' logged out')
-            thestage.innerHTML='<h2> Log in to view the contents</h2>'
+            console.log('user logged out')
+            thestage.innerHTML = '<h2> User has logged out. Log in to view the contents</h2>'
         }
     })
 
@@ -59,7 +70,7 @@
     // https://firebase.google.com/docs/auth/web/manage-users (vereifcation email, etc)
     // https://hackmd.io/@jmk2142/B1-9aonwM?type=view
     // console.log(currentuser)
-    
+
     //signout 
     $(document.getElementById('logout')).click(() => {
         // console.log(currentuser)
@@ -67,5 +78,6 @@
             // console.log('Logged out')
         })
     })
+
 
 })()

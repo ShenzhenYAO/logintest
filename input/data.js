@@ -1,5 +1,5 @@
 var signupform, thestage, signup;
-var auth=undefined;
+var auth=undefined, db;
 var currentuser;
 
 // data for creating the nav bar and its offstring nodes
@@ -341,3 +341,26 @@ var modaltemplatedata = {
         },
     ]
 }
+
+
+var collections = [
+    {
+        "ID": "adherence_research",
+        "documents": [
+            {
+                "id": '<auto uid1>',
+                "fields": [
+                    { "name": "title", "value": "Impact of COC on adherence" },
+                    { "name": "description", "value": "This is the most important discovery ever!" },
+                ]
+            },
+            {
+                "id": '<auto uid2>',
+                "fields": [
+                    { "name": "link", "value": "link to the above great paper" },
+                    { "name": "url", "value": "https://blah.com" },
+                ]
+            },
+        ]
+    }
+]
