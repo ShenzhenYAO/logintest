@@ -1,5 +1,5 @@
 var signupform, thestage, signup;
-var auth=undefined, db;
+var auth = undefined, db, docsdivdata;
 var currentuser;
 
 // data for creating the nav bar and its offstring nodes
@@ -12,7 +12,7 @@ var navdomsdata = {
         'name': 'navbar'
     },
     styles: {
-        'background-color': 'black',
+        'background-color': 'rgba(0,0, 0, 0)',
         'width': '100%',
         'height': '100px'
     },
@@ -26,8 +26,35 @@ var navdomsdata = {
             },
             styles: {
                 'position': 'relative',
+                'background-color': 'black',
+                'height':'100%'
             },
             children: [
+                {
+                    nodetype: 'div',
+                    attrs: {
+                        'class': 'userstatus',
+                        'id': 'userstatus',
+                        'name': 'userstatus'
+                    },
+                    styles: {
+                        'height': '30px',
+                           'color': 'white',
+                        'font-weight': 'normal',
+                        'font-size': '25',
+                        'font-family': 'arial',
+                        'border': 'solid white 1px',
+                        'display': 'flex',
+                        'justify-content': 'center',
+                        'align-items': 'center',
+                        'position': 'absolute',
+                        'top': '30px',
+                        'left': '10px'
+                    },
+                    properties: {
+                        'textContent': 'No user logged in'
+                    }
+                },
                 {
                     nodetype: 'div',
                     attrs: {
@@ -105,6 +132,32 @@ var navdomsdata = {
                     properties: {
                         'textContent': 'Log out'
                     }
+                },
+                {
+                    nodetype: 'div',
+                    attrs: {
+                        'class': 'navbutton',
+                        'id': 'adddoc',
+                        'name': 'adddoc'
+                    },
+                    styles: {
+                        'height': '30px',
+                        'width': '100px',
+                        'color': 'white',
+                        'font-weight': 'bold',
+                        'font-size': '25',
+                        'font-family': 'arial',
+                        'border': 'solid white 1px',
+                        'display': 'flex',
+                        'justify-content': 'center',
+                        'align-items': 'center',
+                        'position': 'absolute',
+                        'top': '30px',
+                        'right': '650px'
+                    },
+                    properties: {
+                        'textContent': 'Add doc'
+                    }
                 }
             ]
         },
@@ -138,7 +191,7 @@ var signupformdata =
     nodetype: 'div',
     attrs: { 'class': 'signform' },
     styles: {
-        'width': '80%',  'background-color': 'lightgreay',
+        'width': '80%', 'background-color': 'lightgreay',
         'position': 'absolute', 'left': '10%', 'top': '35%',
         'display': 'inline-block',
         'align-items': 'center', //vergically, at the center
@@ -147,20 +200,20 @@ var signupformdata =
     },
     children: [
         {
-            nodetype: 'label', attrs: { 'class': 'inputlabel', 'id':'emaillabel' },
+            nodetype: 'label', attrs: { 'class': 'inputlabel', 'id': 'emaillabel' },
             styles: { 'border': '0px', 'font-weight': 'bold', 'color': 'black', 'margin': '10px' },
             properties: { 'textContent': 'User email' }
         },
         {
-            nodetype:'br'
+            nodetype: 'br'
         },
         {
-            nodetype: 'input', 
-            attrs: { 'class': 'input', 'contenteditable': true, 'id': 'email', 'value':'abc@def.com' },
-            styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width':'95%' }
+            nodetype: 'input',
+            attrs: { 'class': 'input', 'contenteditable': true, 'id': 'email', 'value': 'abc@def.com' },
+            styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width': '95%' }
         },
         {
-            nodetype:'br'
+            nodetype: 'br'
         },
         {
             nodetype: 'label', attrs: { 'class': 'inputlabel', 'id': 'passwordlabel' },
@@ -168,18 +221,18 @@ var signupformdata =
             properties: { 'textContent': 'Password' }
         },
         {
-            nodetype: 'input', attrs: { 'class': 'input', 'contenteditable': true, 'id':'password', 'value':'123456' }, 
-            styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width':'95%' }
+            nodetype: 'input', attrs: { 'class': 'input', 'contenteditable': true, 'id': 'password', 'value': '123456' },
+            styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width': '95%' }
         },
         {
-            nodetype:'br'
+            nodetype: 'br'
         },
         {
-            nodetype:'br'
+            nodetype: 'br'
         },
         {
-            nodetype: 'button', 
-            attrs: { 'class': 'submit', 'id': 'signupsubmit' }, 
+            nodetype: 'button',
+            attrs: { 'class': 'submit', 'id': 'signupsubmit' },
             styles: { 'font-size': '30px', 'margin': '10px' },
             properties: { 'textContent': 'submit' }
         }
@@ -193,7 +246,7 @@ var loginformdata =
     nodetype: 'div',
     attrs: { 'class': 'signform' },
     styles: {
-        'width': '80%',  'background-color': 'lightgreay',
+        'width': '80%', 'background-color': 'lightgreay',
         'position': 'absolute', 'left': '10%', 'top': '35%',
         'display': 'inline-block',
         'align-items': 'center', //vergically, at the center
@@ -202,20 +255,20 @@ var loginformdata =
     },
     children: [
         {
-            nodetype: 'label', attrs: { 'class': 'inputlabel', 'id':'emaillabel' },
+            nodetype: 'label', attrs: { 'class': 'inputlabel', 'id': 'emaillabel' },
             styles: { 'border': '0px', 'font-weight': 'bold', 'color': 'black', 'margin': '10px' },
             properties: { 'textContent': 'User email' }
         },
         {
-            nodetype:'br'
+            nodetype: 'br'
         },
         {
-            nodetype: 'input', 
-            attrs: { 'class': 'input', 'contenteditable': true, 'id': 'email', 'value':'abc@def.com' },
-            styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width':'95%' }
+            nodetype: 'input',
+            attrs: { 'class': 'input', 'contenteditable': true, 'id': 'email', 'value': 'abc@def.com' },
+            styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width': '95%' }
         },
         {
-            nodetype:'br'
+            nodetype: 'br'
         },
         {
             nodetype: 'label', attrs: { 'class': 'inputlabel', 'id': 'passwordlabel' },
@@ -223,18 +276,18 @@ var loginformdata =
             properties: { 'textContent': 'Password' }
         },
         {
-            nodetype: 'input', attrs: { 'class': 'input', 'contenteditable': true, 'id':'password', 'value':'123456' }, 
-            styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width':'95%' }
+            nodetype: 'input', attrs: { 'class': 'input', 'contenteditable': true, 'id': 'password', 'value': '123456' },
+            styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width': '95%' }
         },
         {
-            nodetype:'br'
+            nodetype: 'br'
         },
         {
-            nodetype:'br'
+            nodetype: 'br'
         },
         {
-            nodetype: 'button', 
-            attrs: { 'class': 'submit', 'id': 'loginsubmit' }, 
+            nodetype: 'button',
+            attrs: { 'class': 'submit', 'id': 'loginsubmit' },
             styles: { 'font-size': '30px', 'margin': '10px' },
             properties: { 'textContent': 'submit' }
         }
@@ -271,9 +324,9 @@ var modaltemplatedata = {
                 'background-color': '#fefefe',
                 'width': '60%',
                 'height': '60%',
-                'position':'absolute',
-                'top':'20%',
-                'left':'20%',
+                'position': 'absolute',
+                'top': '20%',
+                'left': '20%',
                 'font-size': '28px',
                 // 'cursor':'move'
             },
@@ -283,19 +336,19 @@ var modaltemplatedata = {
                     nodetype: 'div',
                     attrs: { 'id': 'modal-head', 'class': 'modal-head' },
                     styles: {
-                        'height':'15%',
+                        'height': '15%',
                         'padding': '2px 16px',
                         'background-color': 'navy',//'#5cb85c',
-                        'color': 'white',  
-                        'postion':'relative'                      
+                        'color': 'white',
+                        'postion': 'relative'
                     },
                     children: [
                         {
                             nodetype: 'div',
                             attrs: { 'id': 'modal-title', 'class': 'modal-title' },
                             styles: {
-                                'font-family':'arial',
-                                'font-weight':'bold',
+                                'font-family': 'arial',
+                                'font-weight': 'bold',
                                 'font-size': '36px',
                                 'color': 'white',
                                 'position': 'relative',
@@ -303,8 +356,8 @@ var modaltemplatedata = {
                                 // 'border':'black solid',
                                 'width': '80%'
                             },
-                            properties:{
-                                'textContent':'Title'
+                            properties: {
+                                'textContent': 'Title'
                             }
                         },
                         {
@@ -316,11 +369,11 @@ var modaltemplatedata = {
                                 'font-weight': 'bold',
                                 'color': 'yellow',
                                 'position': 'absolute',
-                                'top':'0px',
-                                'right':'10px'
+                                'top': '0px',
+                                'right': '10px'
                             },
-                            properties:{
-                                'textContent':'X'
+                            properties: {
+                                'textContent': 'X'
                             }
                         }
                     ]

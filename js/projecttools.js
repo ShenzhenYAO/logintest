@@ -97,9 +97,7 @@ async function login() {
         return d
     })
 
-    // console.log(loginresponse.user) 
-    // audit user status
-
+    // console.log(loginresponse.user.uid) 
    
 }
 
