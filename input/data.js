@@ -101,7 +101,7 @@ var navdomsdata = {
                         'align-items': 'center',
                         'position': 'absolute',
                         'top': '30px',
-                        'right': '450px'
+                        'right': '350px'
                     },
                     properties: {
                         'textContent': 'Log in'
@@ -127,7 +127,7 @@ var navdomsdata = {
                         'align-items': 'center',
                         'position': 'absolute',
                         'top': '30px',
-                        'right': '250px'
+                        'right': '200px'
                     },
                     properties: {
                         'textContent': 'Log out'
@@ -153,12 +153,37 @@ var navdomsdata = {
                         'align-items': 'center',
                         'position': 'absolute',
                         'top': '30px',
-                        'right': '650px'
+                        'right': '500px'
                     },
                     properties: {
                         'textContent': 'Add doc'
                     }
-                }
+                },
+                {
+                    nodetype: 'div',
+                    attrs: {
+                        'class': 'navbutton',
+                        'id': 'testbutton',
+                        'name': 'testbutton'
+                    },
+                    styles: {
+                        'height': '30px',
+                           'color': 'white',
+                        'font-weight': 'normal',
+                        'font-size': '25',
+                        'font-family': 'arial',
+                        'border': 'solid white 1px',
+                        'display': 'flex',
+                        'justify-content': 'center',
+                        'align-items': 'center',
+                        'position': 'absolute',
+                        'top': '30px',
+                        'left': '450px'
+                    },
+                    properties: {
+                        'textContent': 'Test'
+                    }
+                }, // node
             ]
         },
     ]
