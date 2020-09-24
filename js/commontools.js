@@ -36,7 +36,8 @@ async function MakeModalTemplate(modaltemplatedata) {
     MakeDomEle(modaltemplatedata)
     $('#modal-dialogbox').draggable() //need jqueryui (not jquery)
 
-    // add a listener, when the enter key is pressed and is keyup, click the ok button
+    // add a listener, when the enter key is pressed and is keyup, click the submit button. 
+    // when the esc key is pressed and is keyup, click the close modal button
     $(document).keyup(function (event) {
         // Number 13 is the "Enter" key on the keyboard
         // console.log(event.keyCode)

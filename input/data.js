@@ -42,10 +42,10 @@ var navdomsdata = {
                     styles: {
                         'height': '30px',
                            'color': 'white',
-                        'font-weight': 'normal',
-                        'font-size': '25',
-                        'font-family': 'arial',
-                        'border': 'solid white 1px',
+                        'font-weight': '300',
+                        'font-size': '20',
+                        'font-family': 'open sans',
+                        // 'border': 'solid white 1px',
                         'display': 'flex',
                         'justify-content': 'center',
                         'align-items': 'center',
@@ -66,12 +66,12 @@ var navdomsdata = {
                     },
                     styles: {
                         'height': '30px',
-                        'width': '100px',
+                        // 'width': '100px',
                         'color': 'white',
-                        'font-weight': 'bold',
-                        'font-size': '25',
-                        'font-family': 'arial',
-                        'border': 'solid white 1px',
+                        'font-weight': '300',
+                        'font-size': '30',
+                        'font-family': 'open sans',
+                        // 'border': 'solid white 1px',
                         'display': 'flex',
                         'justify-content': 'center',
                         'align-items': 'center',
@@ -92,18 +92,18 @@ var navdomsdata = {
                     },
                     styles: {
                         'height': '30px',
-                        'width': '100px',
+                        // 'width': '100px',
                         'color': 'white',
-                        'font-weight': 'bold',
-                        'font-size': '25',
-                        'font-family': 'arial',
-                        'border': 'solid white 1px',
+                        'font-weight': '300',
+                        'font-size': '30',
+                        'font-family': 'open sans',
+                        // 'border': 'solid white 1px',
                         'display': 'flex',
                         'justify-content': 'center',
                         'align-items': 'center',
                         'position': 'absolute',
                         'top': '30px',
-                        'right': '350px'
+                        'right': '300px'
                     },
                     properties: {
                         'textContent': 'Log in'
@@ -118,18 +118,18 @@ var navdomsdata = {
                     },
                     styles: {
                         'height': '30px',
-                        'width': '100px',
+                        // 'width': '100px',
                         'color': 'white',
-                        'font-weight': 'bold',
-                        'font-size': '25',
-                        'font-family': 'arial',
-                        'border': 'solid white 1px',
+                        'font-weight': '300',
+                        'font-size': '30',
+                        'font-family': 'open sans',
+                        // 'border': 'solid white 1px',
                         'display': 'flex',
                         'justify-content': 'center',
                         'align-items': 'center',
                         'position': 'absolute',
                         'top': '30px',
-                        'right': '200px'
+                        'right': '150px'
                     },
                     properties: {
                         'textContent': 'Log out'
@@ -144,21 +144,21 @@ var navdomsdata = {
                     },
                     styles: {
                         'height': '30px',
-                        'width': '100px',
+                        // 'width': '100px',
                         'color': 'white',
                         'font-weight': 'bold',
                         'font-size': '25',
                         'font-family': 'arial',
-                        'border': 'solid white 1px',
+                        // 'border': 'solid white 1px',
                         'display': 'flex',
                         'justify-content': 'center',
                         'align-items': 'center',
                         'position': 'absolute',
                         'top': '30px',
-                        'right': '500px'
+                        'right': '600px'
                     },
                     properties: {
-                        'textContent': 'Add doc'
+                        'textContent': 'Add a doc'
                     }
                 },
                 {
@@ -170,11 +170,11 @@ var navdomsdata = {
                     },
                     styles: {
                         'height': '30px',
-                           'color': 'white',
-                        'font-weight': 'normal',
+                        'color': 'white',
+                        'font-weight': 'bold',
                         'font-size': '25',
                         'font-family': 'arial',
-                        'border': 'solid white 1px',
+                        // 'border': 'solid white 1px',
                         'display': 'flex',
                         'justify-content': 'center',
                         'align-items': 'center',
