@@ -69,7 +69,7 @@
             //clean contents in docsdiv
             removenodes(docsdiv)
 
-            var collections = ['public', 'private'];
+            var collections = ['public', 'private', 'adherence_research', 'new1'];
 
             for (var index1 in collections) {
                 // console.log(collections[index1])
@@ -94,9 +94,19 @@
                             // get fields/values in each document
                             var docdata = thedoc.data()
                             // console.log(docdata)
-                            var keys = Object.keys(docdata)
-                            var titletext = 'title' + ": " + docdata['title']
-                            var bodytext = 'text' + ": " + docdata['text']
+                            var keys = Object.keys(docdata), titlefield, textfield
+                            keys.forEach(d => {
+                                // console.log(d)
+                                if (['title', 'link'].includes(d)) {
+                                    titlefield = d
+                                } else if (['desc', 'url', 'comment', 'text', 'description'].includes(d)) {
+                                    textfield = d
+                                }
+                            })
+
+                            // console.log(titlefield)
+                            var titletext = titlefield + ": " + docdata[titlefield]
+                            var bodytext = textfield + ": " + docdata[textfield]
                             // console.log(titletext)
                             var titledivdata = {
                                 parent: docsdiv,
