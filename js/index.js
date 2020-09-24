@@ -64,7 +64,7 @@
         // console.log(user)
         if (user) {
             // console.log('user logged in:', user)
-            $('#userstatus').text(`Current user: [ ${user.email} ]`)
+            $('#userstatus').text(` | ${user.email}`)
 
             //clean contents in docsdiv
             removenodes(docsdiv)
@@ -134,7 +134,7 @@
             } // for
         } else {
             // console.log('user logged out')
-            $('#userstatus').text(`No user logged in`)
+            $('#userstatus').text(`| No user logged in`)
             //clean contents in docsdiv
             removenodes(docsdiv)
         } // if else

@@ -2,25 +2,28 @@ var signupform, thestage, signup;
 var auth = undefined, db, docsdivdata;
 var currentuser;
 
-var adminuid='i0aXqNmedKcpY7Eu4Fp1n9G6Dzx2';
+var adminuid = 'i0aXqNmedKcpY7Eu4Fp1n9G6Dzx2';
 
 // data for creating the nav bar and its offstring nodes
 var navdomsdata = {
     parent: document.body, // parent is an html dom element like <body></body>
-    nodetype: 'nav',
+    nodetype: 'div',
     attrs: {
         'class': 'navbar',
         'id': 'navbar',
         'name': 'navbar'
     },
     styles: {
-        'background-color': 'rgba(0,0, 0, 0)',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        // 'border':'solid red 3px',
+        'position':'fixed',
         'width': '100%',
-        'height': '100px'
+        'height': '70px',
+        'top':'0px'
     },
     children: [
         {
-            nodetype: 'div',
+            nodetype: 'nav',
             attrs: {
                 'class': 'navdiv',
                 'id': 'navdiv',
@@ -28,8 +31,11 @@ var navdomsdata = {
             },
             styles: {
                 'position': 'relative',
+                'top': '0px',
                 'background-color': 'black',
-                'height':'100%'
+                'height': '100%',
+                'width': '100%'
+                // 'border':'solid blue 1px'
             },
             children: [
                 {
@@ -41,20 +47,17 @@ var navdomsdata = {
                     },
                     styles: {
                         'height': '30px',
-                           'color': 'white',
-                        'font-weight': '300',
-                        'font-size': '20',
-                        'font-family': 'open sans',
+                        'width': '200px',
                         // 'border': 'solid white 1px',
                         'display': 'flex',
-                        'justify-content': 'center',
-                        'align-items': 'center',
+                        'justify-content': 'flex-end', //horizontal
+                        'align-items': 'center', // vertical
                         'position': 'absolute',
-                        'top': '30px',
-                        'left': '10px'
+                        'top': '15px',
+                        'right': '15px',
                     },
                     properties: {
-                        'textContent': 'No user logged in'
+                        'textContent': '| No user logged in'
                     }
                 },
                 {
@@ -66,18 +69,14 @@ var navdomsdata = {
                     },
                     styles: {
                         'height': '30px',
-                        // 'width': '100px',
-                        'color': 'white',
-                        'font-weight': 'bold',
-                        'font-size': '25',
                         'font-family': 'open sans',
                         // 'border': 'solid white 1px',
                         'display': 'flex',
                         'justify-content': 'center',
                         'align-items': 'center',
                         'position': 'absolute',
-                        'top': '30px',
-                        'right': '10px'
+                        'top': '15px',
+                        'right': '220px'
                     },
                     properties: {
                         'textContent': 'Sign up'
@@ -93,17 +92,13 @@ var navdomsdata = {
                     styles: {
                         'height': '30px',
                         // 'width': '100px',
-                        'color': 'white',
-                        'font-weight': 'bold',
-                        'font-size': '25',
-                        'font-family': 'open sans',
                         // 'border': 'solid white 1px',
                         'display': 'flex',
                         'justify-content': 'center',
                         'align-items': 'center',
                         'position': 'absolute',
-                        'top': '30px',
-                        'right': '300px'
+                        'top': '15px',
+                        'right': '420px'
                     },
                     properties: {
                         'textContent': 'Log in'
@@ -119,17 +114,13 @@ var navdomsdata = {
                     styles: {
                         'height': '30px',
                         // 'width': '100px',
-                        'color': 'white',
-                        'font-weight': 'bold',
-                        'font-size': '25',
-                        'font-family': 'open sans',
                         // 'border': 'solid white 1px',
                         'display': 'flex',
                         'justify-content': 'center',
                         'align-items': 'center',
                         'position': 'absolute',
-                        'top': '30px',
-                        'right': '150px'
+                        'top': '15px',
+                        'right': '320px'
                     },
                     properties: {
                         'textContent': 'Log out'
@@ -145,17 +136,18 @@ var navdomsdata = {
                     styles: {
                         'height': '30px',
                         // 'width': '100px',
-                        'color': 'white',
+                        // 'color': 'white',
                         'font-weight': 'bold',
-                        'font-size': '25',
+                        // 'font-size': '20',
                         'font-family': 'arial',
                         // 'border': 'solid white 1px',
                         'display': 'flex',
                         'justify-content': 'center',
                         'align-items': 'center',
                         'position': 'absolute',
-                        'top': '30px',
+                        'top': '15px',
                         'left': '650px'
+
                     },
                     properties: {
                         'textContent': 'add a doc'
@@ -170,16 +162,16 @@ var navdomsdata = {
                     },
                     styles: {
                         'height': '30px',
-                        'color': 'white',
+                        // 'color': 'white',
                         'font-weight': 'bold',
-                        'font-size': '25',
+                        'font-size': '20',
                         'font-family': 'arial',
                         // 'border': 'solid white 1px',
                         'display': 'flex',
                         'justify-content': 'center',
                         'align-items': 'center',
                         'position': 'absolute',
-                        'top': '30px',
+                        'top': '15px',
                         'left': '450px'
                     },
                     properties: {
@@ -203,8 +195,9 @@ var stagedata = {
     },
     styles: {
         'background-color': 'white',
+        'margin-top':'90px',
         'width': '100%',
-        'height': '100%'
+        // 'height': '100%'
     }
 }
 
