@@ -68,8 +68,8 @@ var navdomsdata = {
                         'height': '30px',
                         // 'width': '100px',
                         'color': 'white',
-                        'font-weight': '300',
-                        'font-size': '30',
+                        'font-weight': 'bold',
+                        'font-size': '25',
                         'font-family': 'open sans',
                         // 'border': 'solid white 1px',
                         'display': 'flex',
@@ -94,8 +94,8 @@ var navdomsdata = {
                         'height': '30px',
                         // 'width': '100px',
                         'color': 'white',
-                        'font-weight': '300',
-                        'font-size': '30',
+                        'font-weight': 'bold',
+                        'font-size': '25',
                         'font-family': 'open sans',
                         // 'border': 'solid white 1px',
                         'display': 'flex',
@@ -120,8 +120,8 @@ var navdomsdata = {
                         'height': '30px',
                         // 'width': '100px',
                         'color': 'white',
-                        'font-weight': '300',
-                        'font-size': '30',
+                        'font-weight': 'bold',
+                        'font-size': '25',
                         'font-family': 'open sans',
                         // 'border': 'solid white 1px',
                         'display': 'flex',
@@ -155,10 +155,10 @@ var navdomsdata = {
                         'align-items': 'center',
                         'position': 'absolute',
                         'top': '30px',
-                        'right': '600px'
+                        'left': '650px'
                     },
                     properties: {
-                        'textContent': 'Add a doc'
+                        'textContent': 'add a doc'
                     }
                 },
                 {
