@@ -35,21 +35,37 @@ async function MakeDomEle(data) {
 async function MakeModalTemplate(modaltemplatedata) {
     MakeDomEle(modaltemplatedata)
     $('#modal-dialogbox').draggable() //need jqueryui (not jquery)
-    $('#modal-close-button').click(closemodal) 
+
+    // add a listener, when the enter key is pressed and is keyup, click the ok button
+    $(document).keyup(function (event) {
+        // Number 13 is the "Enter" key on the keyboard
+        // console.log(event.keyCode)
+        // Cancel the default action, if needed
+        event.preventDefault();
+        if (event.keyCode === 13) {     //enter        
+            // Trigger the button element with a click
+            document.getElementsByClassName("submit")[0].click();
+        } else if (event.keyCode === 27) { //esc
+            document.getElementById("modal-close-button").click();
+        }
+    });
+
+    $('#modal-close-button').click(closemodal)
+
 }
 
 function closemodal() {
     $('#modal-background').remove()
 }
 
-function removenodes(parent){
-        // cleanup children of thestage
-        removeAllChildNodes(parent)
-        function removeAllChildNodes(parent) {
-            while (parent.firstChild) {
-                parent.removeChild(parent.firstChild);
-            }
+function removenodes(parent) {
+    // cleanup children of thestage
+    removeAllChildNodes(parent)
+    function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
         }
+    }
 }
 
 

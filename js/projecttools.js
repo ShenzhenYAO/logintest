@@ -50,6 +50,7 @@ async function ShowLoginModal(){
                 loginformdata.parent = $('#modal-body')[0];
                 // console.log(signupformdata1.parent);
                 MakeDomEle(loginformdata)
+
                 $('#loginsubmit').click(await login)
         //     }
         // )
