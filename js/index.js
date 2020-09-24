@@ -77,43 +77,49 @@
                 // get data from firestore
                 // note: the get() won't work for conditional rules unless specifying the where clauses
                 // db.collection('adherence_research').get().then(
-                db.collection(collections[index1])
-                    // .where([{"creator", "==", user.uid }])
-                    .where("creator", "in", [user.uid, adminuid])
-                    // .where('request.auth.uid', '==', adminuid) // not work
-                    .get().then(
-                        d => {
-                            // console.log(d.docs)
-                            d.docs.forEach(thedoc => {
-                                // get fields/values in each document
-                                var docdata = thedoc.data()
-                                // console.log(docdata)
-                                var keys = Object.keys(docdata)
-                                var titletext = 'title' + ": " + docdata['title']
-                                var bodytext = 'text' + ": " + docdata['text']
-                                // console.log(titletext)
-                                var titledivdata = {
-                                    parent: docsdiv,
-                                    nodetype: 'div',
-                                    properties: { 'textContent': titletext },
-                                    attrs: { 'class': 'titletext' },
-                                    styles: { 'color': 'black', 'font-size': '30px', 'font-weight': 'bold' }
-                                }
-                                MakeDomEle(titledivdata)
-                                // console.log(bodytext)
-                                var descdivdata = {
-                                    parent: docsdiv,
-                                    nodetype: 'div',
-                                    properties: { 'textContent': bodytext },
-                                    attrs: { 'class': 'bodytext' },
-                                    styles: { 'color': 'green', 'font-size': '25px' },
-                                }
-                                MakeDomEle(descdivdata)
-                                MakeDomEle({ parent: docsdiv, nodetype: 'br' })
-                                // console.log(titledivdata)
-                            }) // d.docs.forEach
-                        } // d
-                    ) // db.get().then()
+
+                var dbquery;
+                if (user.uid === adminuid) {
+                    dbquery = db.collection(collections[index1])
+                } else {
+                    dbquery = db.collection(collections[index1])
+                        .where("creator", "in", [user.uid, adminuid]);
+                }
+
+                // .where('request.auth.uid', '==', adminuid) // not work
+                dbquery.get().then(
+                    d => {
+                        // console.log(d.docs)
+                        d.docs.forEach(thedoc => {
+                            // get fields/values in each document
+                            var docdata = thedoc.data()
+                            // console.log(docdata)
+                            var keys = Object.keys(docdata)
+                            var titletext = 'title' + ": " + docdata['title']
+                            var bodytext = 'text' + ": " + docdata['text']
+                            // console.log(titletext)
+                            var titledivdata = {
+                                parent: docsdiv,
+                                nodetype: 'div',
+                                properties: { 'textContent': titletext },
+                                attrs: { 'class': 'titletext' },
+                                styles: { 'color': 'black', 'font-size': '30px', 'font-weight': 'bold' }
+                            }
+                            MakeDomEle(titledivdata)
+                            // console.log(bodytext)
+                            var descdivdata = {
+                                parent: docsdiv,
+                                nodetype: 'div',
+                                properties: { 'textContent': bodytext },
+                                attrs: { 'class': 'bodytext' },
+                                styles: { 'color': 'green', 'font-size': '25px' },
+                            }
+                            MakeDomEle(descdivdata)
+                            MakeDomEle({ parent: docsdiv, nodetype: 'br' })
+                            // console.log(titledivdata)
+                        }) // d.docs.forEach
+                    } // d
+                ) // db.get().then()
 
             } // for
         } else {
