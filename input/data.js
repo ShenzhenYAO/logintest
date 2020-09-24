@@ -2,6 +2,8 @@ var signupform, thestage, signup;
 var auth = undefined, db, docsdivdata;
 var currentuser;
 
+var adminuid='i0aXqNmedKcpY7Eu4Fp1n9G6Dzx2';
+
 // data for creating the nav bar and its offstring nodes
 var navdomsdata = {
     parent: document.body, // parent is an html dom element like <body></body>
@@ -234,7 +236,7 @@ var signupformdata =
         },
         {
             nodetype: 'input',
-            attrs: { 'class': 'input', 'contenteditable': true, 'id': 'email', 'value': 'abc@def.com' },
+            attrs: { 'class': 'input', 'contenteditable': true, 'id': 'email', 'value': 'a@a.com' },
             styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width': '95%' }
         },
         {
@@ -289,7 +291,7 @@ var loginformdata =
         },
         {
             nodetype: 'input',
-            attrs: { 'class': 'input', 'contenteditable': true, 'id': 'email', 'value': 'abc@def.com' },
+            attrs: { 'class': 'input', 'contenteditable': true, 'id': 'email', 'value': 'a@a.com' },
             styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width': '95%' }
         },
         {

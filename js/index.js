@@ -69,51 +69,60 @@
             //clean contents in docsdiv
             removenodes(docsdiv)
 
-            // get data from firestore
-            // db.collection('adherence_research').get().then(
-            db.collection("adherence_research")
-                // .where([{"creator", "==", user.uid }])
-                .where("creator", "in", [user.uid, 'admin'])
-                .get().then (
-                d => {
-                    // console.log(d.docs)
-                    d.docs.forEach(thedoc => {
-                        // get fields/values in each document
-                        var docdata = thedoc.data()
-                        // console.log(docdata)
-                        var keys = Object.keys(docdata)
-                        var titletext = keys[1] + ": " + docdata[keys[1]]
-                        var bodytext = keys[0] + ": " + docdata[keys[0]]
-                        // console.log(titletext)
-                        var titledivdata = {
-                            parent: docsdiv,
-                            nodetype: 'div',
-                            properties: { 'textContent': titletext },
-                            attrs: { 'class': 'titletext' },
-                            styles: { 'color': 'black', 'font-size': '30px', 'font-weight': 'bold' }
-                        }
-                        MakeDomEle(titledivdata)
-                        // console.log(bodytext)
-                        var descdivdata = {
-                            parent: docsdiv,
-                            nodetype: 'div',
-                            properties: { 'textContent': bodytext },
-                            attrs: { 'class': 'bodytext' },
-                            styles: { 'color': 'green', 'font-size': '25px' },
-                        }
-                        MakeDomEle(descdivdata)
-                        MakeDomEle({ parent: docsdiv, nodetype: 'br' })
-                        // console.log(titledivdata)
-                    }) // d.docs.forEach
-                } // d
-            ) // db.get().then()
+            var collections = ['public', 'private'];
+
+            for (var index1 in collections) {
+                // console.log(collections[index1])
+
+                // get data from firestore
+                // note: the get() won't work for conditional rules unless specifying the where clauses
+                // db.collection('adherence_research').get().then(
+                db.collection(collections[index1])
+                    // .where([{"creator", "==", user.uid }])
+                    .where("creator", "in", [user.uid, adminuid])
+                    // .where('request.auth.uid', '==', adminuid) // not work
+                    .get().then(
+                        d => {
+                            // console.log(d.docs)
+                            d.docs.forEach(thedoc => {
+                                // get fields/values in each document
+                                var docdata = thedoc.data()
+                                // console.log(docdata)
+                                var keys = Object.keys(docdata)
+                                var titletext = 'title' + ": " + docdata['title']
+                                var bodytext = 'text' + ": " + docdata['text']
+                                // console.log(titletext)
+                                var titledivdata = {
+                                    parent: docsdiv,
+                                    nodetype: 'div',
+                                    properties: { 'textContent': titletext },
+                                    attrs: { 'class': 'titletext' },
+                                    styles: { 'color': 'black', 'font-size': '30px', 'font-weight': 'bold' }
+                                }
+                                MakeDomEle(titledivdata)
+                                // console.log(bodytext)
+                                var descdivdata = {
+                                    parent: docsdiv,
+                                    nodetype: 'div',
+                                    properties: { 'textContent': bodytext },
+                                    attrs: { 'class': 'bodytext' },
+                                    styles: { 'color': 'green', 'font-size': '25px' },
+                                }
+                                MakeDomEle(descdivdata)
+                                MakeDomEle({ parent: docsdiv, nodetype: 'br' })
+                                // console.log(titledivdata)
+                            }) // d.docs.forEach
+                        } // d
+                    ) // db.get().then()
+
+            } // for
         } else {
             // console.log('user logged out')
             $('#userstatus').text(`No user logged in`)
             //clean contents in docsdiv
             removenodes(docsdiv)
-        }
-    })
+        } // if else
+    }) //then
 
     // need to update the data that involves thestage (e.g., the signupformdata)
     /** loading data.js is prior to the creation of thestage div. Therefore in the loaded data like
@@ -152,13 +161,49 @@
         attrs: { 'class': 'signform' },
         styles: {
             'width': '80%', 'background-color': 'lightgreay',
-            'position': 'absolute', 'left': '10%', 'top': '35%',
+            'position': 'absolute', 'left': '10%', 'top': '20%',
             'display': 'inline-block',
             'align-items': 'center', //vergically, at the center
             'font-family': 'arial',
-            'font-size': '30px'
+            'font-size': '25px'
         },
         children: [
+            {
+                nodetype: 'label', attrs: { 'class': 'inputlabel', 'id': 'doccollectionlabel' },
+                styles: { 'border': '0px', 'font-weight': 'bold', 'color': 'black', 'margin': '10px' },
+                properties: { 'textContent': 'Collection' }
+            },
+            {
+                nodetype: 'br'
+            },
+            {
+                nodetype: 'input',
+                attrs: { 'class': 'input', 'contenteditable': true, 'id': 'doccollection', 'value': 'public' },
+                styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width': '95%' }
+            },
+            {
+                nodetype: 'br'
+            },
+
+
+            {
+                nodetype: 'label', attrs: { 'class': 'inputlabel', 'id': 'docnamelabel' },
+                styles: { 'border': '0px', 'font-weight': 'bold', 'color': 'black', 'margin': '10px' },
+                properties: { 'textContent': 'Document name' }
+            },
+            {
+                nodetype: 'br'
+            },
+            {
+                nodetype: 'input',
+                attrs: { 'class': 'input', 'contenteditable': true, 'id': 'docname', 'value': 'pubdoc' },
+                styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width': '95%' }
+            },
+            {
+                nodetype: 'br'
+            },
+
+
             {
                 nodetype: 'label', attrs: { 'class': 'inputlabel', 'id': 'doctitlelabel' },
                 styles: { 'border': '0px', 'font-weight': 'bold', 'color': 'black', 'margin': '10px' },
@@ -169,19 +214,19 @@
             },
             {
                 nodetype: 'input',
-                attrs: { 'class': 'input', 'contenteditable': true, 'id': 'doctitle', 'value': 'doctitle' },
+                attrs: { 'class': 'input', 'contenteditable': true, 'id': 'doctitle', 'value': 'pubdoctitle' },
                 styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width': '95%' }
             },
             {
                 nodetype: 'br'
             },
             {
-                nodetype: 'label', attrs: { 'class': 'inputlabel', 'id': 'doccommentlabel' },
+                nodetype: 'label', attrs: { 'class': 'inputlabel', 'id': 'doctextlabel' },
                 styles: { 'border': '0px', 'font-weight': 'bold', 'color': 'black', 'margin': '10px' },
-                properties: { 'textContent': 'Comment' }
+                properties: { 'textContent': 'Text' }
             },
             {
-                nodetype: 'input', attrs: { 'class': 'input', 'contenteditable': true, 'id': 'doccomment', 'value': 'blah blah' },
+                nodetype: 'input', attrs: { 'class': 'input', 'contenteditable': true, 'id': 'doctext', 'value': 'pubdoc text' },
                 styles: { 'border': 'solid black 1px', 'font-size': '30px', 'margin': '10px', 'width': '95%' }
             },
             {
@@ -227,16 +272,23 @@
 
         // console.log('add new doc=====')
         // get data
+        var doccollection = document.getElementById('doccollection').value;
+        var docname = document.getElementById('docname').value;
         var doctitle = document.getElementById('doctitle').value;
-        var doccomment = document.getElementById('doccomment').value
+        var doctext = document.getElementById('doctext').value
         var newdoc = {
-            title: doctitle,
-            comment: doccomment,
-            creator:currentuser.uid
+            collection: doccollection,
+            doc: docname,
+            contents: {
+                title: doctitle,
+                text: doctext,
+                creator: currentuser.uid
+            }
         }
 
         // db.collection('userspecific').add(newdoc).then(d => { // create a new collection
-        db.collection('adherence_research').add(newdoc).then(d => {            
+        // db.collection('public').add(newdoc).then(d => {  
+        db.collection(newdoc.collection).doc(newdoc.doc).set(newdoc.contents).then(d => {
             // console.log(d)
             closemodal()
 
@@ -275,114 +327,114 @@
 
 
 
-// testing firestore data add update delete
+    // testing firestore data add update delete
 
-// create a test button
-$('#testbutton').text('delete a doc ')
-$('#testbutton').click(deletedoc)
+    // create a test button
+    $('#testbutton').text('delete a doc ')
+    $('#testbutton').click(deletedoc)
 
-//https://medium.com/@aaron_lu1/firebase-cloud-firestore-add-set-update-delete-get-data-6da566513b1b
+    //https://medium.com/@aaron_lu1/firebase-cloud-firestore-add-set-update-delete-get-data-6da566513b1b
 
-// create a new collection 
-function addnewcollection() {
-    currentuseruid = auth.currentUser.uid
-    var newdoc1 = {
-        title: 'A new doc',
-        desc: 'A new doc blah blah',
-        creator: currentuseruid
-    }
-    // console.log(newdoc1)
-    // get the current user
-    db.collection('new1').add(newdoc1).then(d => {
-        console.log('new collection added')
-    });
-}
-
-// add a new doc, and customize the name
-function addnewdoc() {
-    currentuseruid = auth.currentUser.uid
-    var newdoc1 = {
-        title: 'A new doc by abca',
-        desc: 'A new doc blah blah by abca',
-        creator: currentuseruid
-    }
-    // console.log(newdoc1)
-    // get the current user
-    db.collection('new1').doc('newdoc2').set(newdoc1).then(d => {
-        console.log('new doc added')
-    });
-    db.collection('new1').doc('newdoc2').set({ newfield: 'yes' }, { merge: true }).then(d => {
-        console.log('new data merged into an existing doc')
-    });
-}
-
-
-// modify an existing document
-function updatedoc() {
-    currentuseruid = auth.currentUser.uid
-    var updatedata = {
-        collection: 'new1',
-        doc: 'newdoc2',
-        contents: {
-            newfield: 'updated',
-            newfield2: 'newly added by abcd'
+    // create a new collection 
+    function addnewcollection() {
+        currentuseruid = auth.currentUser.uid
+        var newdoc1 = {
+            title: 'A new doc',
+            desc: 'A new doc blah blah',
+            creator: currentuseruid
         }
-    }
-    // console.log(newdoc1)
-    // get the current user
-    db.collection(updatedata.collection).doc(updatedata.doc).update(updatedata.contents).then(d => {
-        console.log('document updated')
-    });
-}
-
-// delete a field
-
-function deletefield(){
-    var deletedata = {
-        collection: "new1",
-        doc:'newdoc1',
-        fieldname: 'newfield2'
+        // console.log(newdoc1)
+        // get the current user
+        db.collection('new1').add(newdoc1).then(d => {
+            console.log('new collection added')
+        });
     }
 
-    db.collection(deletedata.collection).doc(deletedata.doc).update(
-        {[deletedata.fieldname]: firebase.firestore.FieldValue.delete()}
-    )    
-    .then(d=>{
-        console.log('field deleted')
-    })
-    ;
-}
-
-
-// delete a doc
-function deletedoc(){
-    var deletedata = {
-        collection: "new1",
-        doc:'newdoc2'
+    // add a new doc, and customize the name
+    function addnewdoc() {
+        currentuseruid = auth.currentUser.uid
+        var newdoc1 = {
+            title: 'A new doc by abca',
+            desc: 'A new doc blah blah by abca',
+            creator: currentuseruid
+        }
+        // console.log(newdoc1)
+        // get the current user
+        db.collection('new1').doc('newdoc2').set(newdoc1).then(d => {
+            console.log('new doc added')
+        });
+        db.collection('new1').doc('newdoc2').set({ newfield: 'yes' }, { merge: true }).then(d => {
+            console.log('new data merged into an existing doc')
+        });
     }
-        db.collection(deletedata.collection).doc(deletedata.doc).delete().then(d=>{
+
+
+    // modify an existing document
+    function updatedoc() {
+        currentuseruid = auth.currentUser.uid
+        var updatedata = {
+            collection: 'new1',
+            doc: 'newdoc2',
+            contents: {
+                newfield: 'updated',
+                newfield2: 'newly added by abcd'
+            }
+        }
+        // console.log(newdoc1)
+        // get the current user
+        db.collection(updatedata.collection).doc(updatedata.doc).update(updatedata.contents).then(d => {
+            console.log('document updated')
+        });
+    }
+
+    // delete a field
+
+    function deletefield() {
+        var deletedata = {
+            collection: "new1",
+            doc: 'newdoc1',
+            fieldname: 'newfield2'
+        }
+
+        db.collection(deletedata.collection).doc(deletedata.doc).update(
+            { [deletedata.fieldname]: firebase.firestore.FieldValue.delete() }
+        )
+            .then(d => {
+                console.log('field deleted')
+            })
+            ;
+    }
+
+
+    // delete a doc
+    function deletedoc() {
+        var deletedata = {
+            collection: "new1",
+            doc: 'newdoc2'
+        }
+        db.collection(deletedata.collection).doc(deletedata.doc).delete().then(d => {
             console.log('document deleted')
         })
-}
-
-// delete a collection
-function deletecollection(){
-    var deletedata = {
-        collection: "new1"
     }
-    // this trick does not work. There is no way to del a collection on a go. must build a recursive function
-        db.collection(deletedata.collection).delete().then(d=>{
+
+    // delete a collection
+    function deletecollection() {
+        var deletedata = {
+            collection: "new1"
+        }
+        // this trick does not work. There is no way to del a collection on a go. must build a recursive function
+        db.collection(deletedata.collection).delete().then(d => {
             console.log('collection deleted')
         })
-}
+    }
 
-// allow create update and delete
-// https://firebase.google.com/docs/firestore/security/rules-structure
-
-
+    // rules to allow create update and delete
+    // https://firebase.google.com/docs/firestore/security/rules-structure
 
 
-// testing firestore data add update delete
+
+
+    // testing firestore data add update delete
 
 
 
