@@ -202,7 +202,7 @@ var stagedata = {
         'name': 'stage'
     },
     styles: {
-        'background-color': 'lightyellow',
+        'background-color': 'white',
         'width': '100%',
         'height': '100%'
     }
